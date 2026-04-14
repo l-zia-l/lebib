@@ -1,1 +1,413 @@
-ss
+/* ==========================================================================
+   LEBIB - CORE STYLESHEET
+========================================================================== 
+*/
+
+:root {
+    /* Color Palette */
+    --crimson: #D72638;      /* Red */
+    --navy: #1B2D48;         /* Blue */
+    --pearl: #F4F1ED;        /* Background */
+    --cyan: #00F5FF;         /* Action Accents (Used Sparingly) */
+    --dark: #0f1928;         /* Text & Dark Backgrounds */
+    --light: #ffffff;        /* Pure White for Cards */
+    
+    /* Typography */
+    --font-stack: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    
+    /* Spacing & Layout */
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+/* ==========================================================================
+   RESET & BASE
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-stack);
+    background-color: var(--pearl);
+    color: var(--dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* ==========================================================================
+   LAYOUT UTILITIES (Mobile First)
+   ========================================================================== */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-lg) 0;
+}
+
+.bg-light { background-color: var(--light); }
+.bg-dark { background-color: var(--dark); color: var(--light); }
+.bg-tan { background-color: var(--pearl); }
+
+.text-center { text-align: center; }
+.text-maroon { color: var(--crimson); }
+
+/* The Stack Rule: Defaults to 1 column for mobile */
+.grid-layout-2-col,
+.grid-layout-3-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+    .grid-layout-2-col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .grid-layout-3-col {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 5%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.nav-brand a {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.nav-brand a::first-letter {
+    color: var(--crimson);
+}
+.nav-brand a {
+    color: var(--navy);
+}
+
+.nav-links {
+    display: none; /* Hidden on mobile MVP, requires JS toggle or CSS checkbox hack for full mobile menu */
+}
+
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex;
+        gap: var(--spacing-md);
+        align-items: center;
+    }
+
+    .nav-links a:not(.btn-primary) {
+        position: relative;
+        font-weight: 600;
+        color: var(--navy);
+    }
+
+    .nav-links a:not(.btn-primary)::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(to right, var(--crimson), var(--navy));
+        transition: width var(--transition-speed) ease;
+    }
+
+    .nav-links a:not(.btn-primary):hover::after,
+    .nav-links a:not(.btn-primary):focus::after {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .btn-whatsapp {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all var(--transition-speed) ease;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--navy);
+    color: var(--light);
+}
+
+.btn-primary:hover {
+    background-color: var(--crimson);
+    transform: translateY(-2px);
+}
+
+.btn-action {
+    background-color: var(--crimson);
+    color: var(--light);
+}
+
+/* Hover States: Duo Interaction (Blue to Red) */
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--navy);
+    color: var(--navy);
+}
+
+.btn-outline:hover {
+    background-color: var(--crimson);
+    border-color: var(--crimson);
+    color: var(--light);
+}
+
+.btn-success { background-color: var(--cyan); color: var(--navy); }
+.btn-secondary { background-color: transparent; border: 1px solid var(--navy); color: var(--navy); }
+.btn-whatsapp { background-color: #25D366; color: white; }
+
+.btn-large { padding: 1rem 2rem; font-size: 1.1rem; }
+.btn-full-width { width: 100%; }
+
+/* ==========================================================================
+   HERO & AI LAB
+   ========================================================================== */
+.hero-section {
+    padding-top: 120px;
+    background-color: var(--navy);
+    color: var(--light);
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.2;
+}
+
+.ai-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-width: 600px;
+    margin: var(--spacing-md) auto 0;
+}
+
+@media (min-width: 768px) {
+    .ai-input-container {
+        flex-direction: row;
+    }
+    .ai-input-container input {
+        flex-grow: 1;
+    }
+}
+
+.ai-input-container input {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: 2px solid transparent;
+    font-size: 1rem;
+    transition: all var(--transition-speed) ease;
+}
+
+@keyframes breathing-glow {
+    0% { box-shadow: 0 0 0 0 rgba(215, 38, 56, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(215, 38, 56, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(215, 38, 56, 0); }
+}
+
+.ai-input-container input:focus {
+    outline: none;
+    border-color: var(--crimson);
+    animation: breathing-glow 2s infinite;
+}
+
+.hidden { display: none !important; }
+
+/* ==========================================================================
+   SECTIONS: ARCHITECT (BLUE) VS BUILDER (RED)
+   ========================================================================== */
+
+/* Architect Sections: Services & Logic */
+.services-section .service-list li {
+    background-color: var(--light);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border-top: 4px solid var(--navy); /* Blue Accent */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.services-section h3 { color: var(--navy); margin-bottom: 0.5rem; }
+
+/* Builder Sections: About & Copywriting */
+.about-section .profile-card {
+    background-color: var(--light);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border-top: 4px solid var(--crimson); /* Red Accent */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.neon-green-divider {
+    border: 0;
+    height: 1px;
+    background: var(--cyan);
+    margin: var(--spacing-lg) auto;
+    width: 50%;
+    opacity: 0.5;
+}
+
+/* ==========================================================================
+   PORTFOLIO
+   ========================================================================== */
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.portfolio-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    /* JS Intersection Observer setup base */
+    opacity: 0; 
+    animation: slideUpFade 0.6s ease forwards;
+}
+
+/* Stagger animations for visual flair if they load together */
+.portfolio-card:nth-child(1) { animation-delay: 0.1s; }
+.portfolio-card:nth-child(2) { animation-delay: 0.3s; }
+.portfolio-card:nth-child(3) { animation-delay: 0.5s; }
+
+.card-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-bottom: 2px solid var(--navy);
+}
+
+.card-content {
+    padding: var(--spacing-md);
+}
+
+.tags {
+    margin: 0.5rem 0 1rem;
+}
+
+.tag {
+    font-size: 0.8rem;
+    background-color: var(--navy);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin-right: 0.5rem;
+}
+
+/* ==========================================================================
+   FORMS & CONTACT
+   ========================================================================== */
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(27, 45, 72, 0.2);
+}
+
+.trust-signals-wrapper {
+    background-color: var(--navy);
+    color: var(--light);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer {
+    padding: var(--spacing-md) 0;
+    border-top: 4px solid var(--crimson);
+}
