@@ -87,6 +87,7 @@ ul {
 
 .text-center { text-align: center; }
 .text-maroon { color: var(--crimson); }
+.text-navy { color: var(--navy); }
 
 /* The Stack Rule: Defaults to 1 column for mobile */
 .grid-layout-2-col,
