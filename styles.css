@@ -1,16 +1,20 @@
 /* ==========================================================================
-   LEBIB - CORE STYLESHEET
+   LEBIB - CORE STYLESHEET (SPACE LAB EDITION)
 ========================================================================== 
 */
 
 :root {
     /* Color Palette */
-    --crimson: #D72638;      /* Red */
+    --crimson: #ff6b7d;      /* Red */
     --navy: #1B2D48;         /* Blue */
     --pearl: #F4F1ED;        /* Background */
     --cyan: #00F5FF;         /* Action Accents (Used Sparingly) */
     --dark: #0f1928;         /* Text & Dark Backgrounds */
     --light: #ffffff;        /* Pure White for Cards */
+    
+    /* Glassmorphism Variables */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
     
     /* Typography */
     --font-stack: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -19,8 +23,8 @@
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
     --spacing-lg: 4rem;
-    --border-radius: 8px;
-    --transition-speed: 0.3s;
+    --border-radius: 12px; /* Slightly rounder for the glass look */
+    --transition-speed: 0.4s; /* Slowed down slightly for smoother life-like feel */
 }
 
 /* ==========================================================================
@@ -39,10 +43,65 @@ html {
 
 body {
     font-family: var(--font-stack);
-    background-color: var(--pearl);
-    color: var(--dark);
+    /* Temporal Background (Day/Night Cycle) */
+    background: linear-gradient(270deg, #050914, #1B2D48, #2a1b38, #1a1a2e);
+    background-size: 800% 800%;
+    animation: dayNightCycle 90s ease-in-out infinite alternate;
+    color: var(--light); /* Text changed to light for the space theme */
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+/* Parallax Starfield */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 200vw; height: 200vh;
+    z-index: -2;
+    pointer-events: none;
+    background-image:
+        radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.5), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 250px 90px, #ffffff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 300px 300px;
+    animation: moveStars 120s linear infinite;
+}
+
+/* Floating Interactive Orbs (Red and Blue) */
+body::after {
+    content: '';
+    position: fixed;
+    top: -50%; left: -50%;
+    width: 200vw; height: 200vh;
+    z-index: -1;
+    pointer-events: none;
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(215, 38, 56, 0.15) 0%, transparent 40%), /* Crimson Glow */
+        radial-gradient(circle at 70% 60%, rgba(0, 245, 255, 0.08) 0%, transparent 40%); /* Cyan/Blue Glow */
+    animation: floatingOrbs 30s ease-in-out infinite alternate;
+}
+
+/* Base Animations */
+@keyframes dayNightCycle {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes moveStars {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+}
+
+@keyframes floatingOrbs {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.1) rotate(5deg); }
 }
 
 img {
@@ -81,13 +140,15 @@ ul {
     padding: var(--spacing-lg) 0;
 }
 
-.bg-light { background-color: var(--light); }
-.bg-dark { background-color: var(--dark); color: var(--light); }
-.bg-tan { background-color: var(--pearl); }
+/* Removed solid backgrounds so the space theme shows through */
+.bg-light, .bg-dark, .bg-tan { 
+    background-color: transparent; 
+}
 
 .text-center { text-align: center; }
-.text-maroon { color: var(--crimson); }
+.text-maroon { color: var(--crimson); }/* Lightened for dark mode readability */
 .text-navy { color: var(--navy); }
+.text-cyan { color: var(--cyan); } /* Swapped to Cyan for contrast */
 
 /* The Stack Rule: Defaults to 1 column for mobile */
 .grid-layout-2-col,
@@ -107,37 +168,36 @@ ul {
 }
 
 /* ==========================================================================
-   NAVIGATION
+   NAVIGATION (Glassmorphism)
    ========================================================================== */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background-color: rgba(15, 25, 40, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-sm) 5%;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .nav-brand a {
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.5px;
+    color: var(--light);
 }
 
 .nav-brand a::first-letter {
     color: var(--crimson);
 }
-.nav-brand a {
-    color: var(--navy);
-}
 
 .nav-links {
-    display: none; /* Hidden on mobile MVP, requires JS toggle or CSS checkbox hack for full mobile menu */
+    display: none; 
 }
 
 @media (min-width: 768px) {
@@ -150,7 +210,7 @@ ul {
     .nav-links a:not(.btn-primary) {
         position: relative;
         font-weight: 600;
-        color: var(--navy);
+        color: var(--light);
     }
 
     .nav-links a:not(.btn-primary)::after {
@@ -160,7 +220,7 @@ ul {
         left: 0;
         width: 0;
         height: 2px;
-        background: linear-gradient(to right, var(--crimson), var(--navy));
+        background: linear-gradient(to right, var(--crimson), var(--cyan));
         transition: width var(--transition-speed) ease;
     }
 
@@ -184,16 +244,21 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
     border: none;
     font-family: inherit;
     font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .btn-primary {
-    background-color: var(--navy);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.2);
     color: var(--light);
 }
 
 .btn-primary:hover {
     background-color: var(--crimson);
+    border-color: var(--crimson);
     transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(215, 38, 56, 0.4);
 }
 
 .btn-action {
@@ -201,21 +266,22 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
     color: var(--light);
 }
 
-/* Hover States: Duo Interaction (Blue to Red) */
 .btn-outline {
-    background-color: transparent;
-    border: 2px solid var(--navy);
-    color: var(--navy);
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--cyan);
+    color: var(--cyan);
+    backdrop-filter: blur(5px);
 }
 
 .btn-outline:hover {
     background-color: var(--crimson);
     border-color: var(--crimson);
     color: var(--light);
+    box-shadow: 0 0 15px rgba(215, 38, 56, 0.5);
 }
 
 .btn-success { background-color: var(--cyan); color: var(--navy); }
-.btn-secondary { background-color: transparent; border: 1px solid var(--navy); color: var(--navy); }
+.btn-secondary { background-color: rgba(255,255,255,0.1); border: 1px solid var(--light); color: var(--light); backdrop-filter: blur(5px); }
 .btn-whatsapp { background-color: #25D366; color: white; }
 
 .btn-large { padding: 1rem 2rem; font-size: 1.1rem; }
@@ -225,16 +291,16 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
    HERO & AI LAB
    ========================================================================== */
 .hero-section {
-    padding-top: 120px;
-    background-color: var(--navy);
-    color: var(--light);
+    padding-top: 150px;
     text-align: center;
+    background-color: transparent; /* Let the stars shine through */
 }
 
 .hero-section h1 {
     font-size: clamp(2rem, 5vw, 3.5rem);
     margin-bottom: var(--spacing-sm);
     line-height: 1.2;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
 .ai-input-container {
@@ -257,9 +323,16 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
 .ai-input-container input {
     padding: 1rem;
     border-radius: var(--border-radius);
-    border: 2px solid transparent;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.2);
+    color: var(--light);
     font-size: 1rem;
     transition: all var(--transition-speed) ease;
+}
+
+.ai-input-container input::placeholder {
+    color: rgba(255,255,255,0.6);
 }
 
 @keyframes breathing-glow {
@@ -271,46 +344,62 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
 .ai-input-container input:focus {
     outline: none;
     border-color: var(--crimson);
+    background-color: rgba(255, 255, 255, 0.15);
     animation: breathing-glow 2s infinite;
 }
 
 .hidden { display: none !important; }
 
 /* ==========================================================================
-   SECTIONS: ARCHITECT (BLUE) VS BUILDER (RED)
+   GLASSMORPHISM SECTIONS (Architect vs Builder)
    ========================================================================== */
+
+/* Base Glass Class applied to all cards */
+.services-section .service-list li,
+.about-section .profile-card,
+.brand-concept-card,
+.contact-form-wrapper,
+.trust-signals-wrapper {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition-speed) ease, background-color var(--transition-speed) ease;
+}
+
+/* Hover effects for living feel */
+.services-section .service-list li:hover,
+.about-section .profile-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.08);
+}
 
 /* Architect Sections: Services & Logic */
 .services-section .service-list li {
-    background-color: var(--light);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius);
-    border-top: 4px solid var(--navy); /* Blue Accent */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--cyan); /* Blue Accent shifted for dark mode */
 }
 
-.services-section h3 { color: var(--navy); margin-bottom: 0.5rem; }
+.services-section h3 { color: var(--cyan); margin-bottom: 0.5rem; }
 
 /* Builder Sections: About & Copywriting */
 .about-section .profile-card {
-    background-color: var(--light);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius);
     border-top: 4px solid var(--crimson); /* Red Accent */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .neon-green-divider {
     border: 0;
     height: 1px;
-    background: var(--cyan);
+    background: linear-gradient(to right, transparent, var(--cyan), transparent);
     margin: var(--spacing-lg) auto;
     width: 50%;
     opacity: 0.5;
 }
 
 /* ==========================================================================
-   PORTFOLIO
+   PORTFOLIO (GLASS CARDS + ENTRANCE FADES)
    ========================================================================== */
 @keyframes slideUpFade {
     from {
@@ -324,13 +413,22 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
 }
 
 .portfolio-card {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: var(--border-radius);
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-    /* JS Intersection Observer setup base */
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     opacity: 0; 
-    animation: slideUpFade 0.6s ease forwards;
+    animation: slideUpFade 0.6s ease;
+    animation-fill-mode: forwards;
+    transition: transform var(--transition-speed) ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255,255,255,0.3);
 }
 
 /* Stagger animations for visual flair if they load together */
@@ -342,7 +440,7 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
-    border-bottom: 2px solid var(--navy);
+    border-bottom: 2px solid var(--cyan);
 }
 
 .card-content {
@@ -355,14 +453,16 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
 
 .tag {
     font-size: 0.8rem;
-    background-color: var(--navy);
+    background-color: rgba(0, 245, 255, 0.15);
+    color: var(--cyan);
     padding: 0.2rem 0.6rem;
     border-radius: 20px;
     margin-right: 0.5rem;
+    border: 1px solid rgba(0, 245, 255, 0.3);
 }
 
 /* ==========================================================================
-   FORMS & CONTACT
+   FORMS & CONTACT (Glass Integration)
    ========================================================================== */
 .form-group {
     margin-bottom: 1.5rem;
@@ -373,6 +473,7 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
+    color: var(--light);
 }
 
 .form-group input,
@@ -380,29 +481,27 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
 .form-group textarea {
     width: 100%;
     padding: 0.8rem;
-    border: 1px solid #ccc;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
     border-radius: var(--border-radius);
+    color: var(--light);
     font-family: inherit;
     font-size: 1rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.form-group select option {
+    background-color: var(--dark);
+    color: var(--light);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--navy);
-    box-shadow: 0 0 0 3px rgba(27, 45, 72, 0.2);
-}
-
-.trust-signals-wrapper {
-    background-color: var(--navy);
-    color: var(--light);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--spacing-md);
+    border-color: var(--cyan);
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.2);
 }
 
 /* ==========================================================================
@@ -410,5 +509,7 @@ button, .btn-primary, .btn-action, .btn-success, .btn-secondary, .btn-outline, .
    ========================================================================== */
 .site-footer {
     padding: var(--spacing-md) 0;
-    border-top: 4px solid var(--crimson);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
 }
