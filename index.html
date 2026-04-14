@@ -1,1 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="lebib - Professional web design, AppSheet development, and AI-driven business solutions. Based in Ghana, available worldwide.">
+    <title>lebib | Custom Websites & Business Apps</title>
+    
+    <link rel="icon" href="logo_1.0.png" type="image/png">
+    
+    </head>
+<body id="top">
 
+    <nav class="navbar" aria-label="Main Navigation">
+        <div class="nav-brand">
+            <a href="#top" aria-label="lebib Home">lebib</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#dream-lab">Dream Lab</a></li>
+            <li><a href="#services-checklist">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#about-us">The Team</a></li>
+            <li><a href="#contact-section" class="btn-primary">Start Project</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header class="hero-section">
+            <div class="container">
+                <h1>We Build the Digital Heart of Your Business</h1>
+                <p>From custom AppSheet tools to professional websites. Use our AI agent below to visualize your dream site in seconds.</p>
+                
+                <div class="ai-input-container">
+                    <label for="business-idea" class="sr-only">Describe your business in one sentence</label>
+                    <input type="text" id="business-idea" name="business-idea" placeholder="Describe your business in one sentence. (e.g., I'm opening a coffee shop in Tamale called 'The Roast')">
+                    <button type="button" id="generate-vision-btn" class="btn-action">Generate My Vision</button>
+                </div>
+            </div>
+        </header>
+
+        <section id="dream-lab" class="ai-lab-section" aria-labelledby="dream-lab-heading">
+            <div class="container">
+                <h2 id="dream-lab-heading" class="sr-only">Your AI Generated Concept</h2>
+                
+                <div id="ai-loading-state" class="loading-container hidden" aria-live="polite">
+                    <div class="spinner"></div>
+                    <p>Loading your digital vision...</p>
+                </div>
+
+                <div id="ai-result-state" class="result-container hidden">
+                    <article class="brand-concept-card">
+                        <div class="concept-visual">
+                            <img src="placeholder-mockup.jpg" alt="AI Generated Mockup of your website" loading="lazy">
+                        </div>
+                        <div class="concept-description">
+                            <h3>Your Brand Concept</h3>
+                            <p id="ai-generated-text">For 'The Roast', we suggest a minimalist aesthetic with warm wood tones, a built-in loyalty app for frequent drinkers, and an integrated 'Order Ahead' feature.</p>
+                        </div>
+                    </article>
+
+                    <div class="transition-choices">
+                        <a href="#place-order" class="btn-success">I love this! Let's build it.</a>
+                        <a href="#services-checklist" class="btn-secondary">I need something else (Website/App/Logo).</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="place-order" class="order-section bg-light">
+            <div class="container">
+                <h2>Ready to bring this concept to life?</h2>
+                <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST" class="minimal-form">
+                    <input type="hidden" name="ai_concept" id="hidden-ai-concept" value="">
+                    
+                    <div class="form-group">
+                        <label for="order-name">Name <span aria-hidden="true">*</span></label>
+                        <input type="text" id="order-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="order-whatsapp">WhatsApp / Phone Number <span aria-hidden="true">*</span></label>
+                        <input type="tel" id="order-whatsapp" name="whatsapp" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="order-budget">Budget Range (Optional)</label>
+                        <select id="order-budget" name="budget">
+                            <option value="">Select a range...</option>
+                            <option value="startup">Startup friendly</option>
+                            <option value="standard">Standard Business</option>
+                            <option value="premium">Premium / Custom</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-large">Send my AI Concept to the Team</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="services-checklist" class="services-section">
+            <div class="container">
+                <h2>Our Core Services</h2>
+                <ul class="service-list grid-layout-2-col">
+                    <li>
+                        <h3>Custom Websites</h3>
+                        <p>Fast, responsive sites built with clean code.</p>
+                    </li>
+                    <li>
+                        <h3>Business Apps (AppSheet)</h3>
+                        <p>Internal tools and management apps built without heavy overhead.</p>
+                    </li>
+                    <li>
+                        <h3>AI Integration</h3>
+                        <p>Adding smart workflows and agents to your existing business.</p>
+                    </li>
+                    <li>
+                        <h3>Creative Copywriting</h3>
+                        <p>Professional, error-free copy that converts visitors into clients.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio-section bg-dark text-light">
+            <div class="container">
+                <h2>Our Work</h2>
+                <div class="grid-layout-3-col">
+                    
+                    <article class="portfolio-card">
+                        <img src="appsheet-mockup.jpg" alt="Retail Inventory App interface on a mobile phone" class="card-img" loading="lazy">
+                        <div class="card-content">
+                            <h3>Retail Inventory App</h3>
+                            <div class="tags">
+                                <span class="tag">Business Logic</span>
+                            </div>
+                            <p><strong>The Problem:</strong> Local retail shop needed to track inventory but found Excel too confusing.</p>
+                            <p><strong>The Solution:</strong> Built a custom AppSheet mobile tool with barcode scanning and automated low-stock alerts.</p>
+                            <a href="demo-link-here" target="_blank" rel="noopener noreferrer" class="btn-outline">Watch Demo</a>
+                        </div>
+                    </article>
+
+                    <article class="portfolio-card">
+                        <img src="website-mockup.jpg" alt="Artist Portfolio website displayed on a laptop" class="card-img" loading="lazy">
+                        <div class="card-content">
+                            <h3>Artist Portfolio</h3>
+                            <div class="tags">
+                                <span class="tag">Web Design</span>
+                                <span class="tag">Creative Copy</span>
+                            </div>
+                            <p><strong>The Problem:</strong> An artist needed a clean, fast-loading gallery to showcase high-resolution work without relying on social media algorithms.</p>
+                            <p><strong>The Solution:</strong> Hand-coded a responsive HTML/CSS website with optimized image delivery and compelling biography copy.</p>
+                            <a href="live-site-link-here" target="_blank" rel="noopener noreferrer" class="btn-outline">Visit Site</a>
+                        </div>
+                    </article>
+
+                    <article class="portfolio-card">
+                        <img src="webapp-mockup.jpg" alt="School Voting System dashboard" class="card-img" loading="lazy">
+                        <div class="card-content">
+                            <h3>School Voting System</h3>
+                            <div class="tags">
+                                <span class="tag">Web App</span>
+                            </div>
+                            <p><strong>The Problem:</strong> A high school needed a secure, real-time platform for live election day voting and announcements.</p>
+                            <p><strong>The Solution:</strong> Developed a functional web application to handle live vote tallying and administrative broadcasts seamlessly.</p>
+                            <a href="case-study-link-here" class="btn-outline">Case Study</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="about-us" class="about-section bg-tan">
+            <div class="container">
+                <header class="about-header text-center text-maroon">
+                    <h2>Decades of Experience Meets Fresh Innovation.</h2>
+                    <p class="brand-story"><strong>lebib</strong> was born from a desire to make high-end tech accessible to new businesses.</p>
+                    <p class="brand-hook">Based in the heart of Ghana, we blend local business understanding with global tech standards.</p>
+                </header>
+
+                <div class="candid-photo-wrapper text-center">
+                    <img src="team-working-candid.jpg" alt="The lebib duo working collaboratively on a project" class="candid-img" loading="lazy">
+                </div>
+
+                <div class="brand-meaning text-center">
+                    <p><em>Why "lebib"? We believe in leveling up your business through intuitive design and robust digital architecture.</em></p>
+                </div>
+
+                <hr class="neon-green-divider">
+
+                <div class="duo-profile grid-layout-2-col">
+                    <article class="profile-card">
+                        <h3 class="text-maroon">The Architect</h3>
+                        <p><strong>Focus:</strong> Strategy, Client Relations, Advanced Architecture.</p>
+                        <p><strong>Vibe:</strong> The "Safe Hands" with long-term industry experience.</p>
+                    </article>
+                    
+                    <article class="profile-card">
+                        <h3 class="text-maroon">The Builder & Creative</h3>
+                        <p><strong>Focus:</strong> Front-end Dev, No-Code Solutions (AppSheet), Copywriting.</p>
+                        <p><strong>Vibe:</strong> The "Design Eye" ensuring every site tells a beautiful story.</p>
+                    </article>
+                </div>
+
+                <hr class="neon-green-divider">
+
+                <div class="lab-philosophy text-center">
+                    <h3 class="text-maroon">Our "Lab" Philosophy</h3>
+                    <div class="grid-layout-3-col philosophy-steps">
+                        <div class="philosophy-step">
+                            <span class="step-number" aria-hidden="true">01</span>
+                            <h4>Listen</h4>
+                            <p>We learn your business goals.</p>
+                        </div>
+                        <div class="philosophy-step">
+                            <span class="step-number" aria-hidden="true">02</span>
+                            <h4>Prototype</h4>
+                            <p>We use AI and logic to show you a vision fast.</p>
+                        </div>
+                        <div class="philosophy-step">
+                            <span class="step-number" aria-hidden="true">03</span>
+                            <h4>Deploy</h4>
+                            <p>We build the final product using clean, secure code.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-section" class="contact-section">
+            <div class="container">
+                <header class="contact-header text-center">
+                    <h2>Let’s Build Something Great Together.</h2>
+                    <p>We’re a remote-first team based in Ghana, serving clients everywhere. Fill out the form or reach out directly.</p>
+                </header>
+
+                <div class="contact-grid grid-layout-2-col">
+                    
+                    <div class="contact-form-wrapper">
+                        <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST" class="standard-form">
+                            <div class="form-group">
+                                <label for="contact-name" class="sr-only">Name</label>
+                                <input type="text" id="contact-name" name="name" placeholder="Name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-business" class="sr-only">Business Name</label>
+                                <input type="text" id="contact-business" name="business" placeholder="Business Name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-project-type" class="sr-only">Project Type</label>
+                                <select id="contact-project-type" name="project_type" required>
+                                    <option value="" disabled selected>Select Project Type...</option>
+                                    <option value="website">Website</option>
+                                    <option value="appsheet">AppSheet App</option>
+                                    <option value="ai_concept">The AI Concept</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-whatsapp" class="sr-only">WhatsApp Number</label>
+                                <input type="tel" id="contact-whatsapp" name="whatsapp" placeholder="WhatsApp Number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-message" class="sr-only">Message</label>
+                                <textarea id="contact-message" name="message" rows="4" placeholder="Tell us about your dream project..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-primary btn-full-width">SEND REQUEST</button>
+                        </form>
+                    </div>
+
+                    <div class="trust-signals-wrapper">
+                        <div class="trust-signal">
+                            <h3>Remote-First, Results-Driven</h3>
+                            <p>We work digitally to keep our overhead low and our quality high.</p>
+                        </div>
+                        <div class="trust-signal">
+                            <h3>Typical Response Time:</h3>
+                            <p>Under 2 hours via WhatsApp.</p>
+                        </div>
+                        <div class="direct-contact">
+                            <a href="https://wa.me/YOUR_PHONE_NUMBER_HERE?text=Hi%20lebib,%20I%20just%20saw%20your%20website%20and%20I'm%20interested%20in%20a%20project!" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                                Chat on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer bg-dark text-center">
+        <div class="container">
+            <p><strong>Based in Ghana | Available Worldwide</strong></p>
+            <p>&copy; 2026 lebib. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
