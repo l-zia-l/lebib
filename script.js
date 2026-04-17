@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 keywords: ['restaurant', 'food', 'catering', 'pizza', 'cafe', 'eat'],
                 primary: '#D72638', 
                 secondary: '#FFC107', 
-                image: 'food.webp',
+                image: 'images/food.webp',
                 title: 'Savor Every Bite.',
                 subtitle: 'Fresh ingredients, unforgettable flavors delivered straight to your table.',
                 cta: 'View Our Menu'
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 keywords: ['plants', 'flowers', 'roses', 'trees', 'florist', 'garden', 'shop'],
                 primary: '#8FBC8F', 
                 secondary: '#D2B48C', 
-                image: 'flower-shop.webp',
+                image: 'images/flower-shop.webp',
                 title: 'Bring Nature Indoors.',
                 subtitle: 'Beautiful, hand-picked blooms for every occasion.',
                 cta: 'Shop the Collection'
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 keywords: ['clothes', 'fashion', 'boutique', 'shoes', 'apparel', 'wear'],
                 primary: '#6A0DAD', 
                 secondary: '#000000', 
-                image: 'fashion.webp',
+                image: 'images/fashion.webp',
                 title: 'Define Your Style.',
                 subtitle: 'The latest seasonal trends, curated exclusively for you.',
                 cta: 'Shop New Arrivals'
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 keywords: ['consultancy', 'office', 'bank', 'tech', 'business', 'corp', 'agency'],
                 primary: '#1B2D48', 
                 secondary: '#00F5FF', 
-                image: 'tech.webp',
+                image: 'images/tech.webp',
                 title: 'Professional Solutions.',
                 subtitle: 'Expertise and technology that drives your business forward.',
                 cta: 'Get Started Today'
