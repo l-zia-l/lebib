@@ -12,58 +12,123 @@ document.addEventListener('DOMContentLoaded', () => {
     const hero = document.querySelector('.hero-section'); 
     const previewStage = document.getElementById('preview-stage');
     const outputArea = document.getElementById('ai-output-area');
-    const decisionPopup = document.getElementById('decision-overlay'); // Updated to match your HTML
+    const decisionPopup = document.getElementById('decision-overlay');
+
+    // Add this lock right above the function
+    let isGenerating = false; 
 
     // 🚀 THE MASTER GENERATION FUNCTION
     const triggerGeneration = (promptText) => {
-        if (!promptText) return; // Prevent empty submissions
+        // If the box is empty OR if it's already generating, stop immediately!
+        if (!promptText || isGenerating) return; 
 
-        // Safety check: Make sure the browser window HTML exists
-        if (!previewStage || !outputArea) {
-            console.error("Missing preview stage HTML!");
-            return;
+        // Lock the engine
+        isGenerating = true;
+
+        if (!previewStage || !outputArea) return;
+
+        /* --- 🧠 THE VIBE MAP (AI Logic Database) --- */
+        const vibeMap = [
+            {
+                category: 'food',
+                keywords: ['restaurant', 'food', 'catering', 'pizza', 'cafe', 'eat'],
+                primary: '#D72638', 
+                secondary: '#FFC107', 
+                image: 'food.webp',
+                title: 'Savor Every Bite.',
+                subtitle: 'Fresh ingredients, unforgettable flavors delivered straight to your table.',
+                cta: 'View Our Menu'
+            },
+            {
+                category: 'plants',
+                keywords: ['plants', 'flowers', 'roses', 'trees', 'florist', 'garden', 'shop'],
+                primary: '#8FBC8F', 
+                secondary: '#D2B48C', 
+                image: 'flower-shop.webp',
+                title: 'Bring Nature Indoors.',
+                subtitle: 'Beautiful, hand-picked blooms for every occasion.',
+                cta: 'Shop the Collection'
+            },
+            {
+                category: 'boutique',
+                keywords: ['clothes', 'fashion', 'boutique', 'shoes', 'apparel', 'wear'],
+                primary: '#6A0DAD', 
+                secondary: '#000000', 
+                image: 'fashion.webp',
+                title: 'Define Your Style.',
+                subtitle: 'The latest seasonal trends, curated exclusively for you.',
+                cta: 'Shop New Arrivals'
+            },
+            {
+                category: 'general',
+                keywords: ['consultancy', 'office', 'bank', 'tech', 'business', 'corp', 'agency'],
+                primary: '#1B2D48', 
+                secondary: '#00F5FF', 
+                image: 'tech.webp',
+                title: 'Professional Solutions.',
+                subtitle: 'Expertise and technology that drives your business forward.',
+                cta: 'Get Started Today'
+            }
+        ];
+
+        /* --- 🔍 THE SCANNER --- */
+        const lowerPrompt = promptText.toLowerCase();
+        let selectedVibe = vibeMap[3]; // Default to general
+
+        for (const vibe of vibeMap) {
+            const isMatch = vibe.keywords.some(keyword => lowerPrompt.includes(keyword));
+            if (isMatch) {
+                selectedVibe = vibe;
+                break; 
+            }
         }
 
-        // 1. Shrink Hero and Move Search to Top
-        if (hero) {
-            hero.classList.add('minimized');
-        }
+        /* --- 🎬 THE ANIMATION & INJECTION --- */
+        if (hero) hero.classList.add('minimized');
 
-        // 2. Lift the Browser Window (Wait a tiny bit for the shrink to start)
+        outputArea.innerHTML = `
+            <div style="padding: 100px 20px; text-align: center;">
+                <h2 style="color: var(--navy); animation: pulse 1.5s infinite;">Analyzing Business Model...</h2>
+                <p style="color: #666; margin-top: 10px;">Generating dynamic layout for "${promptText}"</p>
+            </div>
+        `;
+
         setTimeout(() => {
             previewStage.classList.remove('hidden-preview');
-            // Small delay to ensure CSS registers the display change
-            setTimeout(() => {
-                previewStage.classList.add('active');
-            }, 50);
+            setTimeout(() => { previewStage.classList.add('active'); }, 50);
             
-            // 3. Inject the "Premium Template" Content
-            outputArea.innerHTML = `
-                <div style="padding: 60px 40px; text-align: center;">
-                    <span style="color: var(--red); font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">AI Concept Generated</span>
-                    <h1 style="font-size: 3rem; color: var(--navy); margin: 20px 0;">${promptText}</h1>
-                    <p style="font-size: 1.2rem; color: #555; max-width: 600px; margin: 0 auto;">
-                        We've analyzed your vision. This build requires a high-performance 
-                        React architecture with a focus on deep Navy tones and Cyan accents.
-                    </p>
-                    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 30px;">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--navy);"></div>
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--cyan);"></div>
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--red);"></div>
+            setTimeout(() => {
+                outputArea.innerHTML = `
+                    <div class="mockup-shell" style="--primary: ${selectedVibe.primary}; --secondary: ${selectedVibe.secondary};">
+                        <nav class="mockup-nav">
+                            <div class="mockup-logo-text">${promptText.split(' ')[0].toUpperCase()}</div>
+                            <div class="mockup-links">
+                                <span>HOME</span>
+                                <span>ABOUT</span>
+                                <span>CONTACT</span>
+                            </div>
+                        </nav>
+                        <div class="mockup-hero" style="background-image: url('${selectedVibe.image}');">
+                            <div class="mockup-overlay">
+                                <h1>${selectedVibe.title}</h1>
+                                <p>${selectedVibe.subtitle}</p>
+                                <button class="mockup-cta">${selectedVibe.cta}</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            }, 2500);
+
         }, 600);
 
-        // 4. The 15-Second Business Hook!
         if (decisionPopup) {
             setTimeout(() => {
                 decisionPopup.classList.add('active');
-            }, 15000); // 15 seconds
+            }, 8000); 
         }
     };
 
-    // 🎧 Listeners for Search & Pills
+    /* --- 🎧 THE MISSING EVENT LISTENERS --- */
     if (generateBtn && input) {
         generateBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -143,47 +208,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnLfg = document.getElementById('btn-lfg');
     const btnNah = document.getElementById('btn-nah');
 
-    // Helper function to dismiss the browser and scroll smoothly
     const resetAndScroll = (targetSectionId) => {
-        // 1. Hide the decision overlay
+        // Unlock the engine so they can use it again later!
+        isGenerating = false; 
+        
+        // Clear the input bar so it's fresh for their next idea
+        if (input) input.value = '';
+
         if (decisionPopup) decisionPopup.classList.remove('active');
-        
-        // 2. Slide the browser window back down
         if (previewStage) previewStage.classList.remove('active');
-        
-        // 3. Restore the main hero section to its full glory
         if (hero) hero.classList.remove('minimized');
 
-        // 4. Wait for the animation to clear, then scroll to the target
         setTimeout(() => {
             const targetSection = document.getElementById(targetSectionId);
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth' });
             }
-        }, 400); // 400ms gives the browser window time to slide out of the way
+        }, 400); 
     };
 
-    // The "Nah" Button -> Sends them to the Portfolio
     if (btnNah) {
         btnNah.addEventListener('click', (e) => {
             e.preventDefault();
-            resetAndScroll('portfolio'); // Matches the id="portfolio" in your HTML
+            resetAndScroll('portfolio'); 
         });
     }
 
-    // The "LFG!" Button -> Sends them to the Contact Form
     if (btnLfg) {
         btnLfg.addEventListener('click', (e) => {
             e.preventDefault();
-            
-            // 🔥 UX MAGIC: Pre-fill the contact form with their AI prompt!
             const detailsField = document.getElementById('client-details');
             if (detailsField && input.value) {
                 detailsField.value = "My vision: " + input.value + "\n\nLet's make this happen!";
             }
-            
-            resetAndScroll('contact'); // Matches the id="contact" in your HTML
+            resetAndScroll('contact'); 
         });
     }
-    
 });
